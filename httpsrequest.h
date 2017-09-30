@@ -23,7 +23,7 @@ class Httpsrequest{
 		CURL* c;
 		string url_;
 		map<string,string> param_;
-		static void callback();
+		static size_t callback(void *buffer, size_t size, size_t nmemb, string *userp);
 		
 };
 
