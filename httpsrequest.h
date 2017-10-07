@@ -16,7 +16,7 @@ class Httpsrequest{
 		void seturl(string url);
 		void makerequest();
 		void getResult() const;
-		void terminate();
+		void terminate() const;
 
 	private:
 		CURL* c;

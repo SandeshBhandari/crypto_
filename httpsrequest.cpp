@@ -26,9 +26,8 @@ void Httpsrequest::makerequest(){
 	curl_easy_setopt(c, CURLOPT_WRITEFUNCTION , &Httpsrequest::callback);
 	curl_easy_setopt(c, CURLOPT_WRITEDATA, &s);
 	curl_easy_perform(c);
-	curl_easy_cleanup(c);
-	curl_global_cleanup();
 }
+
 size_t Httpsrequest::callback(void *buffer, size_t size, size_t nmemb, string *userp){
 	size_t totalsize = size * nmemb;
 	size_t oldsize = userp->size();
@@ -47,10 +46,14 @@ size_t Httpsrequest::callback(void *buffer, size_t size, size_t nmemb, string *u
 	return totalsize;
 }
 
+void Httpsrequest::terminate() const{
+	curl_easy_cleanup(c);
+	curl_global_cleanup();
+}
+
 void  Httpsrequest::getResult() const{
 	int pos = url_.find("USDT-");
 	string currency = url_.substr(pos + 5, url_.length());
-	cout << setw(10) << left << "" << setw(10) << left << "Ask" << setw(10) << left << "Bid" << setw(10) << left << "Last" << "\n";
 	cout << setw(10) << left << currency << setw(10) << left << j["result"]["Ask"].get<double>() << setw(10) << left << j["result"]["Bid"].get<double>() << setw(10) << left << j["result"]["Last"].get<double>() << "\n";
 
 }
