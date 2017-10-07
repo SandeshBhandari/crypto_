@@ -34,6 +34,7 @@ int main(int argc, char* argv[]){
 			string url = "https://www.bittrex.com/api/v1.1/public/getticker?market=USDT-" + values[0];
 			request_.seturl(url);
 			request_.makerequest();
+			request_.getResult();
 		}else if(option == "l"){
 		
 		}

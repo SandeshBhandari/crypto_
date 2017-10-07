@@ -15,12 +15,13 @@ class Httpsrequest{
 		Httpsrequest();
 		void seturl(string url);
 		void makerequest();
-		json getResult() const;
+		void getResult() const;
 		void terminate();
 
 	private:
 		CURL* c;
 		string url_;
+		static json j;
 		static size_t callback(void *buffer, size_t size, size_t nmemb, string *userp);
 		
 };

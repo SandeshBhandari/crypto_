@@ -5,8 +5,11 @@
 #include "json.hpp"
 #include <iostream>
 #include <cstdlib>
+#include <iomanip>
 
 using json = nlohmann::json;
+
+json Httpsrequest::j;
 
 Httpsrequest::Httpsrequest(){
 	curl_global_init(CURL_GLOBAL_ALL);
@@ -40,12 +43,14 @@ size_t Httpsrequest::callback(void *buffer, size_t size, size_t nmemb, string *u
 	string str(buffstr_);
 	delete[] buffstr_;
 	userp = &str;
-	json j = json::parse(*userp);
-	cout << j;	
+	j = json::parse(*userp);
 	return totalsize;
 }
 
-json Httpsrequest::getResult() const{
-	cout << "Nothing here right now";
-	return "sj";
+void  Httpsrequest::getResult() const{
+	int pos = url_.find("USDT-");
+	string currency = url_.substr(pos + 5, url_.length());
+	cout << setw(10) << left << "" << setw(10) << left << "Ask" << setw(10) << left << "Bid" << setw(10) << left << "Last" << "\n";
+	cout << setw(10) << left << currency << setw(10) << left << j["result"]["Ask"].get<double>() << setw(10) << left << j["result"]["Bid"].get<double>() << setw(10) << left << j["result"]["Last"].get<double>() << "\n";
+
 }
