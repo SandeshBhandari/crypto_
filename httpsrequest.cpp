@@ -54,6 +54,10 @@ void Httpsrequest::terminate() const{
 void  Httpsrequest::getResult() const{
 	int pos = url_.find("USDT-");
 	string currency = url_.substr(pos + 5, url_.length());
-	cout << setw(10) << left << currency << setw(10) << left << j["result"]["Ask"].get<double>() << setw(10) << left << j["result"]["Bid"].get<double>() << setw(10) << left << j["result"]["Last"].get<double>() << "\n";
+	if (j["success"].get<bool>() == true){
+		cout << setw(10) << left << currency << setw(10) << left << j["result"]["Ask"].get<double>() << setw(10) << left << j["result"]["Bid"].get<double>() << setw(10) << left << j["result"]["Last"].get<double>() << "\n";
+	}else{
+		cout << "Error while getting the values. Check currency entered!\n";
+	}
 
 }

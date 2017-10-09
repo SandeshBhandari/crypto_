@@ -1,3 +1,4 @@
 btc
 eth
 ltc
+neo
