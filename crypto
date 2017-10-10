@@ -1,0 +1,30 @@
+#!/bin/bash
+
+while getopts "la:r:" opt; do
+	case $opt in
+		l)
+			./exec l
+			exit 0
+			;;
+		a)
+			set -f
+			IFS=,
+			arg=($OPTARG)
+			;;
+		r)
+			./exec r ${OPTARG}
+			exit 0
+			;; 
+		[?])
+			echo "Not a valid Option!"
+			exit 1;; 
+	esac
+done
+
+./exec a ${arg[@]}
+
+#for val in "${arg[@]}"; do
+#	echo $val
+#done
+
+exit 0

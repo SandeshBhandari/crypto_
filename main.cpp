@@ -29,7 +29,6 @@ int main(int argc, char* argv[]){
 				fs.open(filename_, fstream::app | fstream::out);
 			}
 			for (auto i: values){
-				cout << i << "\n";
 				fs << i << "\n";
 			}
 		}else if (option == "r"){
