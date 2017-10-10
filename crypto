@@ -3,7 +3,7 @@
 while getopts "la:r:" opt; do
 	case $opt in
 		l)
-			./exec l
+			/usr/local/bin/exec l
 			exit 0
 			;;
 		a)
@@ -12,7 +12,7 @@ while getopts "la:r:" opt; do
 			arg=($OPTARG)
 			;;
 		r)
-			./exec r ${OPTARG}
+			/usr/local/bin/exec r ${OPTARG}
 			exit 0
 			;; 
 		[?])
@@ -21,7 +21,7 @@ while getopts "la:r:" opt; do
 	esac
 done
 
-./exec a ${arg[@]}
+/usr/local/bin/exec a ${arg[@]}
 
 #for val in "${arg[@]}"; do
 #	echo $val
