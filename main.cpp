@@ -20,13 +20,15 @@ int main(int argc, char* argv[]){
 		string option = argv[1];
 		vector<string> values;
 		string filename_ = "tracking.txt";
+		string path = getenv("HOME");
+		string filepath = path + "/crypto_/" + filename_;
 		fstream fs;
 		for (int i = 2; i <= (argc - 1); ++i){
 			values.push_back(argv[i]);
 		}
 		if (option == "a"){
 			if (fs){
-				fs.open(filename_, fstream::app | fstream::out);
+				fs.open(filepath, fstream::app | fstream::out);
 			}
 			for (auto i: values){
 				fs << i << "\n";
@@ -40,7 +42,7 @@ int main(int argc, char* argv[]){
 			request_.getResult();
 			request_.terminate();
 		}else if(option == "l"){
-			fs.open(filename_, fstream::in);
+			fs.open(filepath, fstream::in);
 			vector<string> list;
 			string str;
 			while (getline(fs, str)){
